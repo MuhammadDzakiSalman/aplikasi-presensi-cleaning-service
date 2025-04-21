@@ -1,0 +1,98 @@
+{{-- views/admin/cleaning_service/edit.blade.php
+@extends('app.main')
+@section('title', 'Edit Cleaning Service')
+@section('content')
+    <div id="main">
+        <header class="mb-3">
+            <a class="d-block d-xl-none burger-btn" href="#"><i class="fs-3 bi bi-justify"></i></a>
+        </header>
+        <div class="page-heading">
+            <h3>Edit Data Cleaning Service</h3>
+        </div>
+        <div class="page-content">
+            <section class="row">
+                <div class="col">
+                    <div class="row gx-3 gy-3 mb-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="{{ route('cleaning_service.update', $user->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nama">Nama</label>
+                                                    <input type="text" class="form-control" id="nama" name="nama"
+                                                        value="{{ old('nama', $user->nama) }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="telepon">Telepon</label>
+                                                    <input type="text" class="form-control" id="telepon" name="telepon"
+                                                        value="{{ old('telepon', $user->telepon) }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                    <div>
+                                                        <div class="form-check">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="jenis_kelamin_laki" name="jenis_kelamin"
+                                                                value="laki-laki"
+                                                                {{ $user->jenis_kelamin == 'laki-laki' ? 'checked' : '' }}>
+                                                            <label class="form-check-label"
+                                                                for="jenis_kelamin_laki">Laki-laki</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="jenis_kelamin_perempuan" name="jenis_kelamin"
+                                                                value="perempuan"
+                                                                {{ $user->jenis_kelamin == 'perempuan' ? 'checked' : '' }}>
+                                                            <label class="form-check-label"
+                                                                for="jenis_kelamin_perempuan">Perempuan</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="alamat">Alamat</label>
+                                                    <input type="text" class="form-control" id="alamat" name="alamat"
+                                                        value="{{ old('alamat', $user->alamat) }}" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="foto_diri" class="form-label">Foto Diri</label>
+                                                    <input type="file" class="form-control" id="foto_diri"
+                                                        name="foto_diri">
+                                                    @if ($user->foto_diri)
+                                                        <img src="{{ asset('storage/' . $user->foto_diri) }}" width="100"
+                                                            height="100" alt="Foto Diri">
+                                                    @endif
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="foto_ktp" class="form-label">Foto KTP</label>
+                                                    <input type="file" class="form-control" id="foto_ktp"
+                                                        name="foto_ktp">
+                                                    @if ($user->foto_ktp)
+                                                        <img src="{{ asset('storage/' . $user->foto_ktp) }}" width="100"
+                                                            height="100" alt="Foto KTP">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+@endsection --}}
