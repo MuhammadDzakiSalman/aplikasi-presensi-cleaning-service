@@ -61,29 +61,13 @@ class RiwayatPresensiController extends Controller
                 $userPresensi['tanggal'] = Carbon::parse($tanggal)->format('d-m-Y');
                 $userPresensi['id'] = $presensiMasuk->id;
                 $userPresensi['waktu_masuk'] = Carbon::parse($presensiMasuk->waktu_presensi)->format('H:i');
+                $userPresensi['status_kehadiran'] = $presensiMasuk->status_kehadiran;
 
                 // Cek data presensi keluar
                 if ($data['keluar']) {
                     $userPresensi['waktu_keluar'] = Carbon::parse($data['keluar']->waktu_presensi)->format('H:i');
                 } else {
                     $userPresensi['waktu_keluar'] = '-';
-                }
-
-                // Tentukan status kehadiran
-                $waktuPresensi = Carbon::parse($presensiMasuk->waktu_presensi);
-
-                // Ambil jam masuk dari model JamKerja dan sesuaikan dengan tanggal presensi
-                $jamMasukKerja = Carbon::parse($jamKerja->jam_masuk);
-                $jamMasukKerja->setDateFrom(Carbon::parse($tanggal));
-
-                // Buat objek carbon untuk batas toleransi (jam masuk + 15 menit)
-                $batasToleransi = (clone $jamMasukKerja)->addMinutes(15);
-
-                // Bandingkan waktu presensi dengan batas toleransi
-                if ($waktuPresensi->gt($batasToleransi)) {
-                    $userPresensi['status_kehadiran'] = 'Terlambat';
-                } else {
-                    $userPresensi['status_kehadiran'] = 'Tepat Waktu';
                 }
 
                 $presensiList[] = $userPresensi;

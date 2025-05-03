@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('gambar')->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
+            $table->enum('status_kehadiran', ['Tepat Waktu', 'Terlambat'])->nullable();
             $table->timestamps();
         });
     }

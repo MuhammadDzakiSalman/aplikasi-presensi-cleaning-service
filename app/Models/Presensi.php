@@ -16,6 +16,7 @@ class Presensi extends Model
         'gambar',
         'latitude',
         'longitude',
+        'status_kehadiran'
     ];
 
     public function user()

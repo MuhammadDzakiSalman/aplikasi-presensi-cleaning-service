@@ -85,6 +85,19 @@ class PresensiController extends Controller
 
         $waktuPresensi = Carbon::now();
 
+        $jamKerja = JamKerja::first();
+        $waktuPresensi = Carbon::now();
+
+        $jamMasukKerja = Carbon::createFromFormat(
+            'Y-m-d H:i',
+            $waktuPresensi->format('Y-m-d') . ' ' . $jamKerja->jam_masuk
+        );
+
+        $batasToleransi = (clone $jamMasukKerja)->addMinutes(15);
+
+        $statusKehadiran = $waktuPresensi->gt($batasToleransi) ? 'Terlambat' : 'Tepat Waktu';
+
+
         $presensi = Presensi::create([
             'user_id' => Auth::id(),
             'jenis_presensi' => 'masuk',
@@ -92,6 +105,7 @@ class PresensiController extends Controller
             'gambar' => $gambarPath,
             'latitude' => $latitude,
             'longitude' => $longitude,
+            'status_kehadiran' => $statusKehadiran,
         ]);
 
         return response()->json([

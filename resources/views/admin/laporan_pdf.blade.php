@@ -41,17 +41,8 @@
                         <td>{{ $data['masuk'] ? \Carbon\Carbon::parse($data['masuk']->waktu_presensi)->format('H:i') : '-' }}</td>
                         <td>{{ $data['keluar'] ? \Carbon\Carbon::parse($data['keluar']->waktu_presensi)->format('H:i') : '-' }}</td>
                         <td>
-                            @if ($data['masuk'])
-                                @php
-                                    $waktuPresensi = \Carbon\Carbon::parse($data['masuk']->waktu_presensi);
-                                    $jamMasukKerja = \Carbon\Carbon::parse($data['user']->jamMasuk);
-                                    $batasToleransi = (clone $jamMasukKerja)->addMinutes(15);
-                                    echo $waktuPresensi->gt($batasToleransi) ? 'Terlambat' : 'Tepat Waktu';
-                                @endphp
-                            @else
-                                -
-                            @endif
-                        </td>
+                            {{ $data['masuk'] ? $data['masuk']->status_kehadiran : '-' }}
+                        </td>                        
                     </tr>
                 @endforeach
             @endforeach
